@@ -3,13 +3,12 @@
     <id>com.sludge.beanutilsplugin</id>
     <name>SludgeBeanSetter</name>
     <version>1.0</version>
-    <vendor email="playfulcat79@gmail.com" url="NIL" />
+    <vendor email="playfulcat79@gmail.com" url="NIL" >Sludge</vendor>
 
 
     <description><![CDATA[
 
-    专门生成bean的转换方法.<br>
-    <em>公司不给用任何类型的copyProperty方法，就搞不懂，springframework自己也在用的拷贝方法不给用，就很奇怪</em>
+    <em>The company doesn't allow using any type of copyProperty method. It's hard to understand why, especially since Spring Framework itself uses these copy methods. It's quite odd.</em>
   ]]></description>
 
     <actions>
