@@ -50,10 +50,7 @@ public class GenerateSetterAction extends AnAction {
         PsiClass targetPsiClass = chooser.getSelected();
 
 
-        if (targetPsiClass == null) {
-            Messages.showErrorDialog(project, "未选择任何类", "错误");
-            return;
-        }
+        if (targetPsiClass == null) return;
 
         try {
             String generatedCode = generateSetterMethods(sourcePsiClass, targetPsiClass);
