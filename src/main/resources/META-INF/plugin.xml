@@ -1,0 +1,29 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.sludge.beanutilsplugin</id>
+    <name>SludgeBeanSetter</name>
+    <version>1.0</version>
+    <vendor email="playfulcat79@gmail.com" url="NIL" />
+
+
+    <description><![CDATA[
+
+    专门生成bean的转换方法.<br>
+    <em>公司不给用任何类型的copyProperty方法，就搞不懂，springframework自己也在用的拷贝方法不给用，就很奇怪</em>
+  ]]></description>
+
+    <actions>
+        <action id="com.example.beanutilsplugin.GenerateSetterAction"
+                class="com.sludge.util.GenerateSetterAction"
+                text="Generate Setter Code"
+                description="生成target类的setter代码">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <extension>
+
+        </extension>
+    </extensions>
+</idea-plugin>
