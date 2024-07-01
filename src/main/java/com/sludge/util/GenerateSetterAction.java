@@ -107,6 +107,7 @@ public class GenerateSetterAction extends AnAction {
 
                 if (Objects.isNull(getter.getReturnType())) break;
 
+                String getterType = getter.getReturnType().getCanonicalText();
                 String setterType = setter.getParameterList().getParameters()[0].getType().getCanonicalText();
 
                 String getterMethod = getter.getName();
@@ -125,8 +126,9 @@ public class GenerateSetterAction extends AnAction {
                 } else {
                     String getName = getterMethod.substring(3);
                     String setName = setterMethod.substring(3);
+                    //类型不同，属性名相同
                     if (StringUtil.equals(getName, setName)) {
-                        ConvertStrategy.append(methodBuilder, new InstanceProperty(setterType, sourceInstanceName, setterMethod, targetInstanceName, getterMethod));
+                        ConvertStrategy.append(methodBuilder, new InstanceProperty(getterType, setterType, sourceInstanceName, setterMethod, targetInstanceName, getterMethod));
                     }
                 }
             }

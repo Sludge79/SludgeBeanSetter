@@ -15,8 +15,8 @@ public class ConvertFactory {
     private static final Map<String, TypeConvertor> strategies = new HashMap<>();
 
     static {
-        strategies.put("com.zt3000.common.base.BaseEnumDto", new EnumConvertor());
-        strategies.put("java.time.Instant", new InstantConvertor());
+        strategies.put("com.zt3000.common.base.BaseEnumDto,java.lang.Integer", new EnumConvertor());
+        strategies.put("java.lang.String,java.time.Instant", new InstantConvertor());
     }
 
     public static TypeConvertor getStrategy(String type) {

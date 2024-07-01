@@ -5,7 +5,8 @@ package com.sludge.util.strategy.api;
  * @since 2024/7/1 10:37
  */
 public class InstanceProperty {
-    private String type;
+    private String getterType;
+    private String setterType;
     private String sourceInstanceName;
     private String setterMethod;
     private String targetInstanceName;
@@ -14,20 +15,29 @@ public class InstanceProperty {
     public InstanceProperty() {
     }
 
-    public InstanceProperty(String type, String sourceInstanceName, String setterMethod, String targetInstanceName, String getterMethod) {
-        this.type = type;
+    public InstanceProperty(String getterType, String setterType, String sourceInstanceName, String setterMethod, String targetInstanceName, String getterMethod) {
+        this.getterType = getterType;
+        this.setterType = setterType;
         this.sourceInstanceName = sourceInstanceName;
         this.setterMethod = setterMethod;
         this.targetInstanceName = targetInstanceName;
         this.getterMethod = getterMethod;
     }
 
-    public String getType() {
-        return type;
+    public String getGetterType() {
+        return getterType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setGetterType(String getterType) {
+        this.getterType = getterType;
+    }
+
+    public String getSetterType() {
+        return setterType;
+    }
+
+    public void setSetterType(String setterType) {
+        this.setterType = setterType;
     }
 
     public String getSourceInstanceName() {
