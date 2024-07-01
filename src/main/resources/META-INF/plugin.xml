@@ -8,19 +8,23 @@
 
     <description><![CDATA[
 
-    <em>The company doesn't allow using any type of copyProperty method. It's hard to understand why, especially since Spring Framework itself uses these copy methods. It's quite odd.</em>
+    <em>The company doesn't allow using any type of copyProperty method.
+     It's hard to understand why, especially since Spring Framework itself uses these copy methods. It's quite odd.</em>
   ]]></description>
 
     <actions>
         <action id="com.example.beanutilsplugin.GenerateSetterAction"
                 class="com.sludge.util.GenerateSetterAction"
                 text="Generate Setter Code function"
-                description="公司不给用任何类型的copyProperty方法，就搞不懂，springframework自己也在用的拷贝方法不给用，就很奇怪">
+                description="公司不给用任何类型的copyProperty方法，就搞不懂，
+                springframework自己也在用的拷贝方法不给用，就很奇怪">
             <add-to-group group-id="GenerateGroup" anchor="last"/>
         </action>
     </actions>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.java</depends>
 
     <extensions defaultExtensionNs="com.intellij">
     </extensions>

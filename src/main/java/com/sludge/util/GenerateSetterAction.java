@@ -11,12 +11,15 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilBase;
+import com.sludge.util.strategy.ConvertStrategy;
+import com.sludge.util.strategy.api.InstanceProperty;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -103,10 +106,12 @@ public class GenerateSetterAction extends AnAction {
                 PsiMethod setter = targetSetters.get(propertyName);
 
                 if (Objects.isNull(getter.getReturnType())) break;
-                if (getter.getReturnType().equalsToText(setter.getParameterList().getParameters()[0].getType().getCanonicalText())) {
-                    String getterMethod = getter.getName();
-                    String setterMethod = setter.getName();
 
+                String setterType = setter.getParameterList().getParameters()[0].getType().getCanonicalText();
+
+                String getterMethod = getter.getName();
+                String setterMethod = setter.getName();
+                if (getter.getReturnType().equalsToText(setterType)) {
                     methodBuilder
                             .append("\t\t")
                             .append(sourceInstanceName)
@@ -117,6 +122,12 @@ public class GenerateSetterAction extends AnAction {
                             .append(".")
                             .append(getterMethod)
                             .append("());\n");
+                } else {
+                    String getName = getterMethod.substring(3);
+                    String setName = setterMethod.substring(3);
+                    if (StringUtil.equals(getName, setName)) {
+                        ConvertStrategy.append(methodBuilder, new InstanceProperty(setterType, sourceInstanceName, setterMethod, targetInstanceName, getterMethod));
+                    }
                 }
             }
         }
@@ -127,6 +138,7 @@ public class GenerateSetterAction extends AnAction {
                 .append("\t}");
         return methodBuilder.toString();
     }
+
 
     private Map<String, PsiMethod> getGetterMethods(PsiClass psiClass) {
         Map<String, PsiMethod> getters = new HashMap<>();
