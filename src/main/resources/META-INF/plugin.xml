@@ -2,7 +2,7 @@
 <idea-plugin>
     <id>com.sludge.beanutilsplugin</id>
     <name>SludgeBeanSetter</name>
-    <version>1.1</version>
+    <version>1.0</version>
     <vendor email="playfulcat79@gmail.com" url="NIL" >Sludge</vendor>
 
 
