@@ -3,15 +3,16 @@
     <id>com.sludge.beanutilsplugin</id>
     <name>SludgeBeanSetter</name>
     <version>1.0</version>
-    <vendor email="playfulcat79@gmail.com" url="NIL" >Sludge</vendor>
+    <vendor email="playfulcat79@gmail.com" url="NIL">Sludge</vendor>
 
 
     <description><![CDATA[
-
+    Provides code generation support for company zt3000
+    <hr />
     <em>The company doesn't allow using any type of copyProperty method.
      It's hard to understand why, especially since Spring Framework itself uses these copy methods. It's quite odd.</em>
-
-     Plugin Description:
+    <hr />
+    Plugin Description:
      Automatically generate Java-Bean property copying code (e.g., A-Bean.setProp(B.getProp())).
      Provides a static method for setting and getting properties from bean A to bean B.
      Use Alt + Insert to find the 'Generate Setter Code' function and choose a target class to complete code generation.
