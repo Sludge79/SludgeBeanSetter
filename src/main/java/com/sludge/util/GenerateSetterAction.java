@@ -20,11 +20,10 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilBase;
 import com.sludge.util.strategy.ConvertStrategy;
 import com.sludge.util.strategy.api.InstanceProperty;
+import org.apache.commons.collections.CollectionUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author Sludge
@@ -99,6 +98,7 @@ public class GenerateSetterAction extends AnAction {
 
         Map<String, PsiMethod> sourceGetters = getGetterMethods(sourceClass);
         Map<String, PsiMethod> targetSetters = getSetterMethods(targetClass);
+        Set<String> fills = new HashSet<>();
 
         for (String propertyName : sourceGetters.keySet()) {
             if (targetSetters.containsKey(propertyName)) {
@@ -123,15 +123,32 @@ public class GenerateSetterAction extends AnAction {
                             .append(".")
                             .append(getterMethod)
                             .append("());\n");
+                    fills.add(propertyName);
                 } else {
                     String getName = getterMethod.substring(3);
                     String setName = setterMethod.substring(3);
                     //类型不同，属性名相同
                     if (StringUtil.equals(getName, setName)) {
-                        ConvertStrategy.append(methodBuilder, new InstanceProperty(getterType, setterType, sourceInstanceName, setterMethod, targetInstanceName, getterMethod));
+                        boolean append = ConvertStrategy.append(methodBuilder, new InstanceProperty(getterType, setterType, sourceInstanceName, setterMethod, targetInstanceName, getterMethod));
+                        if (append) {
+                            fills.add(propertyName);
+                        }
                     }
                 }
             }
+        }
+
+        Set<String> all = sourceGetters.keySet();
+        fills.forEach(all::remove);
+        all.remove("Class");
+        if (CollectionUtils.isNotEmpty(all)) {
+            methodBuilder.append("\t\t//the following keys does not match on target.\n");
+            all.forEach(key ->
+                    methodBuilder
+                            .append("\t\t//")
+                            .append(key)
+                            .append("\n")
+            );
         }
         methodBuilder
                 .append("\t\treturn ")
